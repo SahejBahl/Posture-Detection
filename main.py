@@ -19,6 +19,7 @@ def calculate_angle(a,b,c):
     return angle 
 
 cap = cv2.VideoCapture(0) #set video capture device
+
 #setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened(): #loop through feed
@@ -46,10 +47,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             #calculate angle
             angle = calculate_angle(shoulder, elbow, wrist)
 
-            #visualize
+            #visualize angle
             cv2.putText(image, str(angle),
-                        tuple(np.multiply(elbow, [640, 480]).astype(int),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AAA)
+                        tuple(np.multiply(elbow, [640, 480]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                        )
             
             print(landmarks)
